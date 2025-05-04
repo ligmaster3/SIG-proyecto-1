@@ -1,8 +1,8 @@
 <?php
-require_once '../models/Reporte.php';
-require_once '../models/Estudiante.php';
-require_once '../models/Libro.php';
-require_once '../models/Prestamo.php';
+require_once 'models\Reporte.php';
+require_once 'models\Estudiante.php';
+require_once 'models\Libro.php';
+require_once 'models\Prestamo.php';
 
 class ReportesController {
     private $reporteModel;
@@ -40,7 +40,7 @@ class ReportesController {
                 $data = $this->reporteModel->obtenerEstadisticasGenerales();
         }
         
-        require_once '../views/reportes/index.php';
+        require_once 'views\reportes\index.php';
     }
     
     public function exportar() {
