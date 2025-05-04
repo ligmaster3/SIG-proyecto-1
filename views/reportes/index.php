@@ -1,4 +1,4 @@
-<?php require_once '../views/layout/header.php'; ?>
+<?php require_once 'views\layout\header.php'; ?>
 
 <div class="container">
     <h1 class="my-4">Reportes Gerenciales</h1>
@@ -138,4 +138,4 @@
     </div>
 </div>
 
-<?php require_once '../views/layout/footer.php'; ?>
+<?php require_once 'views\layout\footer.php'; ?>
