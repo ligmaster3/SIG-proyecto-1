@@ -1,4 +1,4 @@
-<?php require_once '../views/layout/header.php'; ?>
+<?php require_once 'views\layout\header.php'; ?>
 
 <div class="container">
     <h1 class="my-4">Detalle del Préstamo #<?= $prestamo['prestamo_id'] ?></h1>
@@ -107,4 +107,4 @@
     </div>
 </div>
 
-<?php require_once '../views/layout/footer.php'; ?>
+<?php require_once 'views\layout\footer.php'; ?>
