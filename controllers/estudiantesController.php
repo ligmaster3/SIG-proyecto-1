@@ -1,6 +1,6 @@
 <?php
-require_once '../models/Estudiante.php';
-require_once '../models/Carrera.php';
+require_once 'models\Estudiante.php';
+require_once 'models\Carrera.php';
 
 class EstudiantesController {
     private $model;
@@ -13,7 +13,7 @@ class EstudiantesController {
     
     public function index() {
         $estudiantes = $this->model->obtenerTodos();
-        require_once '../views/estudiantes/index.php';
+        require_once 'views\Estudiantes\index.php';
     }
     
     public function crear() {
@@ -34,16 +34,16 @@ class EstudiantesController {
                 } else {
                     $error = "Error al crear el estudiante";
                     $carreras = $this->carreraModel->obtenerTodas();
-                    require_once '../views/estudiantes/crear.php';
+                    require_once 'views\Estudiantes\crear.php';
                 }
             } catch (Exception $e) {
                 $error = $e->getMessage();
                 $carreras = $this->carreraModel->obtenerTodas();
-                require_once '../views/estudiantes/crear.php';
+                require_once 'views\Estudiantes\crear.php';
             }
         } else {
             $carreras = $this->carreraModel->obtenerTodas();
-            require_once '../views/estudiantes/crear.php';
+            require_once 'views\Estudiantes\crear.php';
         }
     }
     
@@ -72,12 +72,12 @@ class EstudiantesController {
                 $error = "Error al actualizar el estudiante";
                 $estudiante = $this->model->obtenerPorId($id);
                 $carreras = $this->carreraModel->obtenerTodas();
-                require_once '../views/estudiantes/editar.php';
+                require_once 'views\Estudiantes\editar.php';
             }
         } else {
             $estudiante = $this->model->obtenerPorId($id);
             $carreras = $this->carreraModel->obtenerTodas();
-            require_once '../views/estudiantes/editar.php';
+            require_once 'views\Estudiantes\editar.php';
         }
     }
     
@@ -94,7 +94,7 @@ class EstudiantesController {
     public function buscar() {
         $termino = $_GET['q'] ?? '';
         $estudiantes = $this->model->buscar($termino);
-        require_once '../views/estudiantes/index.php';
+        require_once 'views\Estudiantes\index.php';
     }
 }
 ?>
