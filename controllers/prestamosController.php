@@ -1,7 +1,7 @@
 <?php
-require_once '../models/Prestamo.php';
-require_once '../models/Libro.php';
-require_once '../models/Estudiante.php';
+require_once 'models\Prestamo.php';
+require_once 'models\Libro.php';
+require_once 'models\Estudiante.php';
 
 class PrestamosController {
     private $prestamoModel;
@@ -16,7 +16,7 @@ class PrestamosController {
     
     public function index() {
         $prestamos = $this->prestamoModel->obtenerTodos();
-        require_once '../views/prestamos/index.php';
+        require_once 'views\prestamos\index.php';
     }
     
     public function crear() {
@@ -38,12 +38,12 @@ class PrestamosController {
                 $error = "Error al registrar el préstamo";
                 $libros = $this->libroModel->obtenerDisponibles();
                 $estudiantes = $this->estudianteModel->obtenerTodos();
-                require_once '../views/prestamos/crear.php';
+                require_once 'views\prestamos\crear.php';
             }
         } else {
-            $libros = $this->libroModelibroModel->obtenerDisponibles();
+            $libros = $this->libroModel->obtenerDisponibles();
             $estudiantes = $this->estudianteModel->obtenerTodos();
-            require_once '../views/prestamos/crear.php';
+            require_once 'views\prestamos\crear.php';
         }
     }
     
@@ -77,19 +77,19 @@ class PrestamosController {
         
         switch ($reporte) {
             case 'vencidos':
-                $data = $this->prestamoModel->obtenerPrestamosVencidos();
+                $data = $this->prestamoModel->obtenerTodos();
                 break;
             case 'carreras':
-                $data = $this->prestamoModel->obtenerPrestamosPorCarrera();
+                $data = $this->prestamoModel->obtenerTodos();
                 break;
             case 'categorias':
-                $data = $this->prestamoModel->obtenerPrestamosPorCategoria();
+                $data = $this->prestamoModel->obtenerTodos();
                 break;
             default:
                 $data = $this->prestamoModel->obtenerEstadisticasGenerales();
         }
         
-        require_once '../views/reportes/index.php';
+        require_once 'views\reportes\index.php';
     }
 }
 ?>
