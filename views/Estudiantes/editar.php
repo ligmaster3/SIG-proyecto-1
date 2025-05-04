@@ -1,4 +1,4 @@
-<?php require_once '../views/layout/header.php'; ?>
+<?php require_once 'views\layout\header.php'; ?>
 
 <div class="container">
     <h1 class="my-4">Editar Estudiante</h1>
@@ -123,4 +123,4 @@ document.querySelector('form').addEventListener('submit', function(e) {
 });
 </script>
 
-<?php require_once '../views/layout/footer.php'; ?>
+<?php require_once 'views\layout\footer.php'; ?>
