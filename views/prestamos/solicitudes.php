@@ -1,4 +1,4 @@
-<?php require_once '../views/layout/header.php'; ?>
+<?php require_once 'views\layout\header.php'; ?>
 
 <div class="container">
     <h1 class="my-4">Solicitudes de Préstamo</h1>
