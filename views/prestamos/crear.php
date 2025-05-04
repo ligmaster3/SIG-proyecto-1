@@ -1,4 +1,4 @@
-<?php require_once '../views/layout/header.php'; ?>
+<?php require_once 'views\layout\header.php'; ?>
 
 <div class="container">
     <h1 class="my-4">Registrar Nuevo Préstamo</h1>
@@ -71,4 +71,4 @@ document.getElementById('fecha_devolucion_esperada').addEventListener('change', 
 });
 </script>
 
-<?php require_once '../views/layout/footer.php'; ?>
+<?php require_once 'views\layout\footer.php'; ?>
