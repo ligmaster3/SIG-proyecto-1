@@ -1,5 +1,6 @@
-LibrosController.php<?php
-require_once '../models/Libro.php';
+<?php
+// filepath: c:\Users\eniga\OneDrive\Documentos\GitHub\SIG-proyecto\controllers\librosController.php
+require_once 'models\Libro.php';    
 
 class LibrosController {
     private $model;
@@ -10,7 +11,7 @@ class LibrosController {
     
     public function index() {
         $libros = $this->model->obtenerTodos();
-        require_once '../views/libros/index.php';
+        require_once 'views\Libros\index.php';
     }
     
     public function crear() {
@@ -29,10 +30,10 @@ class LibrosController {
                 header('Location: index.php?controller=libros&action=index&success=1');
             } else {
                 $error = "Error al crear el libro";
-                require_once '../views/libros/crear.php';
+                require_once 'views\Libros\crear.php';
             }
         } else {
-            require_once '../views/libros/crear.php';
+            require_once 'views\Libros\crear.php';
         }
     }
     
@@ -60,11 +61,11 @@ class LibrosController {
             } else {
                 $error = "Error al actualizar el libro";
                 $libro = $this->model->obtenerPorId($id);
-                require_once '../views/libros/editar.php';
+                require_once 'views\Libros\editar.php';
             }
         } else {
             $libro = $this->model->obtenerPorId($id);
-            require_once '../views/libros/editar.php';
+           require_once 'views\Libros\editar.php';
         }
     }
     
@@ -81,7 +82,7 @@ class LibrosController {
     public function buscar() {
         $termino = $_GET['q'] ?? '';
         $libros = $this->model->buscar($termino);
-        require_once '../views/libros/index.php';
+        require_once 'views\Libros\index.php';
     }
 }
 ?>
