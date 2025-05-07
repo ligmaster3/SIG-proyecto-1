@@ -61,39 +61,32 @@ class Estudiante
         return $stmt && $stmt->affected_rows > 0;
     }
     
-    public function actualizar($id, $data, $foto = null) {
+    public function actualizar($id, array $data, ?array $foto = null): bool {
+        // Cargar datos actuales
+        $actual = $this->obtenerPorId($id);
         if ($foto && $foto['error'] === UPLOAD_ERR_OK) {
-            $foto_path = $this->guardarFoto($foto);
-            $data['foto_path'] = $foto_path;
-    
-            $estudiante_actual = $this->obtenerPorId($id);
-            if (!empty($estudiante_actual['foto_path'])) {
-                $old_file = "assets/uploads/" . $estudiante_actual['foto_path'];
-                if (file_exists($old_file)) {
-                    unlink($old_file);
-                }
+            $newPath = $this->guardarFoto($foto);
+            $data['foto_path'] = $newPath;
+            // eliminar anterior
+            $oldFile = 'assets/uploads/' . $actual['foto_path'];
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
             }
         }
-    
-        $sql = "UPDATE estudiantes SET ";
-        $updates = [];
+        unset($data['estudiante_id']);
+        $fields = [];
         $params = [];
-    
-        foreach ($data as $key => $value) {
-            $updates[] = "$key = ?";
-            $params[] = $value;
+        foreach ($data as $k => $v) {
+            $fields[] = "$k = ?";
+            $params[] = $v;
         }
-    
-        $sql .= implode(', ', $updates);
-        $sql .= " WHERE estudiante_id = ?";
+        $sql = "UPDATE estudiantes SET " . implode(', ', $fields) . " WHERE estudiante_id = ?";
         $params[] = $id;
-    
         $stmt = $this->db->executeQuery($sql, $params);
-        return $stmt && $stmt->affected_rows > 0;
+        return $stmt->affected_rows > 0;
     }
-    
-    
 
+    
    
     public function guardarFoto($foto)
     {
@@ -129,12 +122,12 @@ class Estudiante
 
         // Mover el archivo subido
         if (!move_uploaded_file($foto["tmp_name"], $new_target)) {
+
             throw new Exception("Error al subir la imagen.");
         }
 
         return $new_filename;
     }
-
 
     public function eliminar($id): bool {
         // cargar para path

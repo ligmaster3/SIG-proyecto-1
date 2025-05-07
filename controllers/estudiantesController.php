@@ -48,9 +48,7 @@ class EstudiantesController {
     }
     
 
-    /** */
-    public function editar()
-    {
+    public function editar() {
         $id = $_GET['id'] ?? null;
     
         if (!$id) {
@@ -66,30 +64,28 @@ class EstudiantesController {
                 'correo' => $_POST['correo'],
                 'genero' => $_POST['genero'],
                 'carrera_id' => $_POST['carrera_id'],
-                'turno' => $_POST['turno'],
-                
+                'turno' => $_POST['turno']
             ];
     
             $foto = $_FILES['foto'] ?? null;
     
             if ($this->model->actualizar($id, $data, $foto)) {
-                header('Location: index.php?controller=estudiantes&action=index&success=1');
+                header("Location: index.php?controller=estudiantes&action=index&success=1");
             } else {
-                $error = "Error al actualizar el estudiante";
+                $error = "Error al actualizar.";
                 $estudiante = $this->model->obtenerPorId($id);
                 $carreras = $this->carreraModel->obtenerTodas();
-                require_once 'views\Estudiantes\editar.php';
+                require_once 'views/Estudiantes/editar.php';
             }
-        } else {
-            $estudiante = $this->model->obtenerPorId($id);
-            $carreras = $this->carreraModel->obtenerTodas();
-            require_once 'views\Estudiantes\editar.php';
         }
-    }
-
-
     
-    public function eliminar() {
+        $estudiante = $this->model->obtenerPorId($id);
+        $carreras = $this->carreraModel->obtenerTodas();
+        require_once 'views/Estudiantes/editar.php';
+    }
+    
+        
+        public function eliminar() {
         try {
             $id = $_GET['id'] ?? null;
             if (!$id) throw new Exception('ID no proporcionado');
@@ -99,7 +95,6 @@ class EstudiantesController {
             header('Location: index.php?controller=estudiantes&action=index&error=1'); exit;
         }
     }
-
     
     public function buscar() {
         $termino = $_GET['q'] ?? '';
