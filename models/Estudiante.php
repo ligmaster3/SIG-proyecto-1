@@ -45,7 +45,7 @@ class Estudiante {
         }
         
         // Verificar tamaño
-        if ($foto["size"] > 500000) {
+        if ($foto["size"] > 50000000) {
             throw new Exception("La imagen es demasiado grande.");
         }
         
