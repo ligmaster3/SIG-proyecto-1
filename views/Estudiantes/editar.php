@@ -77,7 +77,7 @@
                     <small class="form-text text-muted">
                         Foto actual:
                         <?php if ($estudiante['foto_path']): ?>
-                        <a href="../assets/uploads/<?= $estudiante['foto_path'] ?>" target="_blank">Ver foto</a>
+                        <a href="assets/uploads/<?= $estudiante['foto_path'] ?>" target="_blank">Ver foto</a>
                         <?php else: ?>
                         No tiene foto registrada
                         <?php endif; ?>
