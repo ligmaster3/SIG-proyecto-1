@@ -77,11 +77,13 @@
                 <div class="form-group">
                     <label for="foto">Foto del Estudiante <span class="text-danger">*</span></label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*" required>
+                        <input type="file" class="custom-file-input" id="foto" name="foto" accept=".jpg,.jpeg,.png"
+                            required>
                         <label class="custom-file-label" for="foto">Seleccionar archivo...</label>
                     </div>
                     <small class="form-text text-muted">
-                        Formatos aceptados: JPG, PNG (Máx. 500KB)
+                        Formatos aceptados: JPG, PNG<br>
+                        Tamaño máximo: 2MB
                     </small>
                 </div>
             </div>
@@ -124,7 +126,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     }
 
     // Validar tamaño de foto (max 500KB)
-    if (foto && foto.size > 50099000) {
+    if (foto && foto.size > 512000) {
         alert('La imagen es demasiado grande (máximo 500KB permitido)');
         e.preventDefault();
         return;
