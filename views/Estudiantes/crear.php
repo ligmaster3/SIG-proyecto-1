@@ -124,7 +124,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     }
 
     // Validar tamaño de foto (max 500KB)
-    if (foto && foto.size > 500000) {
+    if (foto && foto.size > 50099000) {
         alert('La imagen es demasiado grande (máximo 500KB permitido)');
         e.preventDefault();
         return;
