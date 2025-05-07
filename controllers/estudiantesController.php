@@ -49,12 +49,12 @@ class EstudiantesController {
     
     public function editar() {
         $id = $_GET['id'] ?? null;
-        
+    
         if (!$id) {
             header('Location: index.php?controller=estudiantes&action=index');
             exit;
         }
-        
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'cedula' => $_POST['cedula'],
@@ -65,7 +65,20 @@ class EstudiantesController {
                 'carrera_id' => $_POST['carrera_id'],
                 'turno' => $_POST['turno']
             ];
-            
+    
+            // Si se sube nueva foto, procesarla
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
+                try {
+                    $data['foto_path'] = $this->model->guardarFoto($_FILES['foto']);
+                } catch (Exception $e) {
+                    $error = "Error al subir imagen: " . $e->getMessage();
+                    $estudiante = $this->model->obtenerPorId($id);
+                    $carreras = $this->carreraModel->obtenerTodas();
+                    require_once 'views\Estudiantes\editar.php';
+                    return;
+                }
+            }
+    
             if ($this->model->actualizar($id, $data)) {
                 header('Location: index.php?controller=estudiantes&action=index&success=1');
             } else {
@@ -80,6 +93,7 @@ class EstudiantesController {
             require_once 'views\Estudiantes\editar.php';
         }
     }
+    
     
     public function eliminar() {
         $id = $_GET['id'] ?? null;
