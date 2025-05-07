@@ -40,6 +40,7 @@
                 <th>ID</th>
                 <th>Cédula</th>
                 <th>Nombre</th>
+                <th>Foto</th>
                 <th>Carrera</th>
                 <th>Turno</th>
                 <th>Acciones</th>
@@ -51,16 +52,23 @@
                 <td><?= $estudiante['estudiante_id'] ?></td>
                 <td><?= htmlspecialchars($estudiante['cedula']) ?></td>
                 <td><?= htmlspecialchars($estudiante['nombre'] . ' ' . $estudiante['apellido']) ?></td>
+                <td>
+                    <?php if (!empty($estudiante['foto_path'])): ?>
+                    <img src="assets/uploads/<?= htmlspecialchars($estudiante['foto_path']) ?>"
+                        alt="Foto de <?= htmlspecialchars($estudiante['nombre']) ?>" class="img-thumbnail"
+                        style="width: 50px; height: 50px;">
+                    <?php endif; ?>
+                </td>
                 <td><?= htmlspecialchars($estudiante['carrera']) ?></td>
                 <td><?= ucfirst(htmlspecialchars($estudiante['turno'])) ?></td>
                 <td>
                     <a href="index.php?controller=estudiantes&action=editar&id=<?= $estudiante['estudiante_id'] ?>"
-                        class="btn btn-sm btn-info">
+                        class="btn btn-sm btn-info" onclick="editEstudiante(<?= $estudiante['estudiante_id'] ?>)">
                         <i class="fas fa-edit"></i>
                     </a>
                     <a href="index.php?controller=estudiantes&action=eliminar&id=<?= $estudiante['estudiante_id'] ?>"
                         class="btn btn-sm btn-danger"
-                        onclick="return confirm('¿Está seguro de eliminar este estudiante?')">
+                        onclick="return confirm('¿Estás seguro de eliminar este estudiante?')">
                         <i class="fas fa-trash"></i>
                     </a>
                 </td>
