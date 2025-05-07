@@ -47,14 +47,17 @@ class EstudiantesController {
         }
     }
     
-    public function editar() {
+
+    /** */
+    public function editar()
+    {
         $id = $_GET['id'] ?? null;
-        
+    
         if (!$id) {
             header('Location: index.php?controller=estudiantes&action=index');
             exit;
         }
-        
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'cedula' => $_POST['cedula'],
@@ -63,10 +66,13 @@ class EstudiantesController {
                 'correo' => $_POST['correo'],
                 'genero' => $_POST['genero'],
                 'carrera_id' => $_POST['carrera_id'],
-                'turno' => $_POST['turno']
+                'turno' => $_POST['turno'],
+                
             ];
-            
-            if ($this->model->actualizar($id, $data)) {
+    
+            $foto = $_FILES['foto'] ?? null;
+    
+            if ($this->model->actualizar($id, $data, $foto)) {
                 header('Location: index.php?controller=estudiantes&action=index&success=1');
             } else {
                 $error = "Error al actualizar el estudiante";
@@ -80,16 +86,20 @@ class EstudiantesController {
             require_once 'views\Estudiantes\editar.php';
         }
     }
+
+
     
     public function eliminar() {
-        $id = $_GET['id'] ?? null;
-        
-        if ($id && $this->model->eliminar($id)) {
-            header('Location: index.php?controller=estudiantes&action=index&success=1');
-        } else {
-            header('Location: index.php?controller=estudiantes&action=index&error=1');
+        try {
+            $id = $_GET['id'] ?? null;
+            if (!$id) throw new Exception('ID no proporcionado');
+            $this->model->eliminar($id);
+            header('Location: index.php?controller=estudiantes&action=index&success=1'); exit;
+        } catch (Exception $e) {
+            header('Location: index.php?controller=estudiantes&action=index&error=1'); exit;
         }
     }
+
     
     public function buscar() {
         $termino = $_GET['q'] ?? '';
